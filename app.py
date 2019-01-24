@@ -25,7 +25,7 @@ class DataStruct:
         self.indexTree = indexTree
         self.sortedList = sortedList
         
-# https://stackoverflow.com/questions/36640673/why-should-i-use-classes-in-python/36641737 paaiskina kam ir kaip
+# tbh nereikia klases kol kas sutos. sugalvoti kaip panaudoti. https://stackoverflow.com/questions/36640673/why-should-i-use-classes-in-python/36641737 paaiskina kam ir kaip
 
 def get_first_letter(word):
     return '' if word == '' else word[0]
@@ -42,6 +42,8 @@ def find_end_point(strList):
             
 def create_subList(strList, endPoint):
     newList = [elem[1:] for elem in strList[:endPoint]] # reik krc pasalinti pirmas raides. list spliting, comprehension
+    if all(value is '' for value in newList):
+        newList = ['']
     return newList
 
 def create_index(strList):
@@ -72,17 +74,18 @@ def create_index(strList):
 
 # ziurim kas gaunasi
 
-strList = ['aa', 'cd', 'gav', 'agfgf', 'aba', 'ccc', 'gd', 'cb', 'ac', 'acc', 'bc', 'b']
+dataDict = transformData(readData())
+strList = dataDict['first']
+# strList = ['aa', 'cd', 'gav', 'agfgf', 'aba', 'ccc', 'gd', 'cb', 'ac', 'acc', 'bc', 'b']
+# strList = ['acc', 'ac', 'acc']
 strList.sort()
-print(strList)
 
 test = create_index(strList)
 
 data = DataStruct(indexTree = test, sortedList = strList)
 
-print(index_search('acc', test))
+print(index_search('Bett', test))
 print(index_search('de', test))
-
 
 def binary_search(intList, item): # assume sorted
     start = 0
