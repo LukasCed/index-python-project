@@ -116,3 +116,22 @@ def index_search(item, index): # esme atrasti kur elementas yra susortintame lis
     
     return whereInSortedList
         
+def readData():
+    f = open("data.csv","r")
+    fdata = f.readlines()
+    f.close()
+    return fdata
+    
+def transformData(fdata):
+    dataDict = dict()
+    for (index, line) in enumerate(fdata):
+        if index == 0:
+            props = line.strip('\n').split(',')
+            for (index, prop) in enumerate(props):
+                dataDict[prop] = list()
+        else:
+            dataLine = line.strip('\n').split(',')
+            for (index, prop) in enumerate(props):
+                dataDict[prop].append(dataLine[index])
+                
+    return dataDict        
