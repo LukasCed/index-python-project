@@ -25,7 +25,7 @@ class DataStruct:
         self.indexTree = indexTree
         self.sortedList = sortedList
         
-# tbh nereikia klases kol kas sutos. sugalvoti kaip panaudoti. https://stackoverflow.com/questions/36640673/why-should-i-use-classes-in-python/36641737 paaiskina kam ir kaip
+# https://stackoverflow.com/questions/36640673/why-should-i-use-classes-in-python/36641737 paaiskina kam ir kaip
 
 def get_first_letter(word):
     return '' if word == '' else word[0]
@@ -75,17 +75,23 @@ def create_index(strList):
 # ziurim kas gaunasi
 
 dataDict = transformData(readData())
-strList = dataDict['first']
+strList = sorted(dataDict['first'])
+sortedIndex = [i[0] for i in sorted(enumerate(dataDict['first']), key=lambda x:x[1])]
+
 # strList = ['aa', 'cd', 'gav', 'agfgf', 'aba', 'ccc', 'gd', 'cb', 'ac', 'acc', 'bc', 'b']
 # strList = ['acc', 'ac', 'acc']
-strList.sort()
 
 test = create_index(strList)
 
 data = DataStruct(indexTree = test, sortedList = strList)
 
-print(index_search('Bett', test))
-print(index_search('de', test))
+indexInSortedList = index_search('Bett', test)
+origIndex = sortedIndex[indexInSortedList]
+print(dataDict['first'][origIndex])
+print(dataDict['last'][origIndex])
+print(dataDict['phone'][origIndex])
+
+# print(index_search('de', test))
 
 def binary_search(intList, item): # assume sorted
     start = 0
