@@ -13,5 +13,6 @@ Requirements
 How to run:
 
 1) Unzip project
-2) python main.py
+2) pip install -r requirements.txt
+3) python main.py
 
