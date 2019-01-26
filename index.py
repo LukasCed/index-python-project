@@ -46,10 +46,12 @@ def find_end_point(str_list):
 
 
 def create_subList(str_list, end_point):
-    new_list = [elem[1:] for elem in str_list[:end_point]]  # list spliting, comprehension. pasalinam pirmas raides
+    # list spliting, comprehension. pasalinam pirmas raides
+    new_list = [elem[1:] for elem in str_list[:end_point]]
     if all(value is '' for value in new_list):
         new_list = ['']
     return new_list
+
 
 def create_index(str_list):
     index = IndexTree([])
@@ -60,13 +62,16 @@ def create_index(str_list):
         while len(str_list) != 0:
             letter = get_first_letter(str_list[0])  # apie kuria raide kalbam
             end_point = find_end_point(str_list)  # kada baigiasi ta pati raide
-            sub_list = create_subList(str_list, end_point)  # nukerpu pirmas raides
+            sub_list = create_subList(
+                str_list, end_point)  # nukerpu pirmas raides
             interval = range(ref_point, ref_point + end_point)
 
-            index_interval_tuple = (interval, create_index(
-                sub_list))  # tuple. cia paduodu tos pacios raides sublista kuriam nukirptos pirmos raides
+            # tuple. cia paduodu tos pacios raides sublista kuriam nukirptos
+            # pirmos raides
+            index_interval_tuple = (interval, create_index(sub_list))
             # also rekursija
-            index_info = {letter: index_interval_tuple}  # dict. raide ir kur ji pasiroda ir jos tolimesne info
+            # dict. raide ir kur ji pasiroda ir jos tolimesne info
+            index_info = {letter: index_interval_tuple}
 
             index.branchList.append(index_info)
 
@@ -76,6 +81,7 @@ def create_index(str_list):
             ref_point = ref_point + end_point
 
         return index
+
 
 def binary_search(intList, item):  # assume sorted
     start = 0
@@ -92,15 +98,18 @@ def binary_search(intList, item):  # assume sorted
 
     return -1
 
+
 def index_search(item, index):  # esme atrasti kur elementas yra susortintame list'e
     where_in_sorted_list = 0
     index_to_search = index
     for char in item:
-        if index_to_search is None or not index_to_search.branch_with_key_exist(char):
+        if index_to_search is None or not index_to_search.branch_with_key_exist(
+                char):
             return -1
         # search letter in index
         #         print(indexToSearch.branchList)
-        where_in_sorted_list = where_in_sorted_list + index_to_search.get_key_range_from_inclusive(char)
+        where_in_sorted_list = where_in_sorted_list + \
+            index_to_search.get_key_range_from_inclusive(char)
         index_to_search = index_to_search.get_key_index(char)
 
     return where_in_sorted_list

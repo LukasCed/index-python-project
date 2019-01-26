@@ -22,9 +22,16 @@ while True:
                 name = input()
                 print("Creating an index", name, "from property", prop)
                 str_list = sorted(data_dict[prop])
-                sort_to_orig_map = [i[0] for i in sorted(enumerate(data_dict[prop]), key=lambda x: x[1])]
-                index_data = IndexData(index_tree=create_index(str_list), index_name=name, orig_list=str_list,
-                                       sort_to_orig_map=sort_to_orig_map)
+                sort_to_orig_map = [
+                    i[0] for i in sorted(
+                        enumerate(
+                            data_dict[prop]),
+                        key=lambda x: x[1])]
+                index_data = IndexData(
+                    index_tree=create_index(str_list),
+                    index_name=name,
+                    orig_list=str_list,
+                    sort_to_orig_map=sort_to_orig_map)
                 index_data_list.append(index_data)
                 print("Index", index_data.index_name, "was created.")
                 prop_is_set = True
@@ -39,7 +46,8 @@ while True:
                 print("Index not found. Try again")
                 name = input()
             else:
-                index_data = [elem for elem in index_data_list if elem.index_name == name][0]
+                index_data = [
+                    elem for elem in index_data_list if elem.index_name == name][0]
                 break
 
         print("Enter data to search for")
