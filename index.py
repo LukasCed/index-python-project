@@ -23,11 +23,12 @@ class IndexTree:
 
 
 class IndexData:
-    def __init__(self, index_tree, index_name, orig_list, sort_to_orig_map):
+    def __init__(self, index_tree, search_function, index_name, orig_list, sort_to_orig_map):
         self.index_tree = index_tree
         self.index_name = index_name
         self.orig_list = orig_list
         self.sort_to_orig_map = sort_to_orig_map
+        self.search_function = search_function
 
 
 def get_first_letter(word):
@@ -83,15 +84,16 @@ def create_index(str_list):
         return index
 
 
-def binary_search(intList, item):  # assume sorted
+def binary_search(item, intList):  # assume sorted
     start = 0
     end = len(intList) - 1
+    item = int(item)
 
     while start <= end:
         mid_point = (end + start) // 2
-        if intList[mid_point] == item:
+        if int(intList[mid_point]) == item:
             return mid_point
-        elif intList[mid_point] < item:
+        elif int(intList[mid_point]) < item:
             start = mid_point + 1
         else:
             end = mid_point - 1
@@ -113,3 +115,6 @@ def index_search(item, index):  # esme atrasti kur elementas yra susortintame li
         index_to_search = index_to_search.get_key_index(char)
 
     return where_in_sorted_list
+
+def check_if_list_is_numeric(list):
+    return all(item.isdigit() for item in list)
