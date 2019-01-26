@@ -8,10 +8,12 @@ The purpose of this project is to learn python
 Requirements
 
 1) Python 3 
-2) Include data.csv file in same folder as .py files
+2) PIP
+3) Include data.csv file in same folder as .py files
 
 How to run:
 
 1) Unzip project
-2) python main.py
+2) pip install -r requirements.txt
+3) python main.py
 
