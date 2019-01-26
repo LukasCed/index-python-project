@@ -12,4 +12,6 @@ Requirements
 
 How to run:
 
+1) Unzip project
+2) python main.py
 
